@@ -5,10 +5,9 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 
 public class ConnectionDB {
-    private final String dbURI = "jdbc:mysql://localhost:3306/talentflow?useSSL=false";
+    private final String dbURI = "jdbc:mysql://localhost:8080/SportFlow?useSSL=false";
     private final String dbUsername = "root";
     private final String dbPassword = "admin";
-    //private final String dbPassword = "0000";
 
     public ConnectionDB () {}
 
@@ -18,7 +17,6 @@ public class ConnectionDB {
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
             con = DriverManager.getConnection(dbURI, dbUsername, dbPassword);
-            System.out.println("database connected");
         }
         catch (SQLException e) {
             e.printStackTrace();
@@ -28,6 +26,16 @@ public class ConnectionDB {
         }
 
         return con;
+    }
+    public static void main(String[] args) {
+        ConnectionDB db = new ConnectionDB();
+        Connection con = db.getConnection();
+
+        if (con != null) {
+            System.out.println("Connection is successful!");
+        } else {
+            System.out.println("Connection failed!");
+        }
     }
 }
 
